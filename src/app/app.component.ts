@@ -23,45 +23,36 @@ import { Egreso } from './egreso/egreso.model';
     EgresoComponent,
   ],
 })
+
 export class AppComponent {
   title = 'presupuesto_app';
 
-  ingresos: Ingreso[] = [];
-  egresos: Egreso[] = [];
-
   constructor(
     private ingresoServicio: IngresoServicio,
-    private egresoServicio: EgresoServicio
-  ) {
-    this.ingresos = ingresoServicio.ingresos;
-    this.egresos = egresoServicio.egresos;
-  }
-
+    private egresoServicio: EgresoServicio,
+  ) {}
+//En el constructor de AppComponent, estamos inyectando dos servicios: IngresoServicio y EgresoServicio. 
+//Estos servicios nos proporcionarán los datos de ingresos y egresos que necesitamos para calcular los totales.
   getIngresoTotal(){
-    let ingresoTotal:number = 0;
-    this.ingresos.forEach(ingreso => {
-      ingresoTotal += ingreso.valor;
-    }
-    );
-    return ingresoTotal;
+    return this.ingresoServicio.ingreso.reduce((total, ingreso) => total + ingreso.valor, 0);
   }
+//calcula el total de ingresos sumando los valores de cada objeto ingreso en el arreglo ingresoServicio.ingreso. 
+//Utiliza el método reduce() para sumar los valores y devuelve el resultado
   getEgresoTotal(){
-    let egresoTotal:number = 0;
-    this.egresos.forEach(egreso => {
-      egresoTotal += egreso.valor;
-    }
-    );
-    return egresoTotal;
+    return this.egresoServicio.egreso.reduce((total, egreso) => total + egreso.valor, 0);
   }
-
+//calcula el total de egresos de manera similar al método getIngresoTotal(), pero suma los valores de los objetos egreso 
+//en el arreglo egresoServicio.egreso.
   getPorcentajeTotal(){
-    return this.getEgresoTotal()/this.getIngresoTotal();
-
+    const ingresoTotal = this.getIngresoTotal();
+    const egresoTotal = this.getEgresoTotal();
+    return egresoTotal / ingresoTotal;
   }
-
+//calcula el porcentaje total dividiendo el total de egresos entre el total de ingresos. Primero obtiene los totales de 
+//ingresos y egresos llamando a los métodos getIngresoTotal() y getEgresoTotal(), respectivamente.
   getPresupuestoTotal(){
-    return this.getIngresoTotal()- this.getEgresoTotal();
+    return this.getIngresoTotal() - this.getEgresoTotal();
   }
-
+  //calcula el presupuesto total restando el total de egresos del total de ingresos. Nuevamente, utiliza 
+  //los métodos getIngresoTotal() y getEgresoTotal() para obtener los totales necesarios.
 }
-
