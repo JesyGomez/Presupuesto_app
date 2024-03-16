@@ -5,5 +5,5 @@ export class IngresoServicio{
         new Ingreso("Salario", 4000),
         new Ingreso("Venta de Coche", 500)
     ]
- ingresos: Ingreso[]; 
+ ingresos: Ingreso[] = this.ingreso; 
 }

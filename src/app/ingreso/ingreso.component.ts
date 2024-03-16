@@ -17,5 +17,7 @@ ingresos: Ingreso[]=[];
 
 constructor(private ingresoServicio:IngresoServicio){
 }
-
+ngOnInit(){
+  this.ingresos = this.ingresoServicio.ingresos;
+}
 }
