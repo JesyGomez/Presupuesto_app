@@ -27,10 +27,15 @@ import { Egreso } from './egreso/egreso.model';
 export class AppComponent {
   title = 'presupuesto_app';
 
-  constructor(
-    private ingresoServicio: IngresoServicio,
-    private egresoServicio: EgresoServicio,
-  ) {}
+  ingresos: Ingreso[]=[];
+  egresos: Egreso[]=[];
+
+  constructor(private ingresoServicio: IngresoServicio,
+              private egresoServicio: EgresoServicio){
+                this.ingresos = ingresoServicio.ingresos;
+                this.egresos = egresoServicio.egresos;
+              }
+                            
 //En el constructor de AppComponent, estamos inyectando dos servicios: IngresoServicio y EgresoServicio. 
 //Estos servicios nos proporcionarán los datos de ingresos y egresos que necesitamos para calcular los totales.
   getIngresoTotal(){

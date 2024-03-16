@@ -20,6 +20,7 @@ export class CabeceroComponent {
   constructor(
     private ingresoServicio: IngresoServicio,
     private egresoServicio: EgresoServicio
-  ) {}
+  ) {    
+  }
   
 }

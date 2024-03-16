@@ -4,6 +4,12 @@ export class IngresoServicio{
     ingreso:Ingreso[]=[
         new Ingreso("Salario", 4000),
         new Ingreso("Venta de Coche", 500)
-    ]
+    ];
+
+    eliminar(ingreso: Ingreso){
+        const indice: number = this.ingresos.indexOf(ingreso);
+        this.ingresos.splice(indice,1); 
+    }
+
  ingresos: Ingreso[] = this.ingreso; 
 }
